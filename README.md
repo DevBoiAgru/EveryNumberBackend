@@ -1,5 +1,5 @@
 # Backend for the Every Number site
-Extremely simple golang backend connected to a redis database for keeping track of liked numbers, along with handling rate limiting.
+Extremely simple golang backend connected to a redis database for keeping track of liked numbers.
 
 ## Getting Started
 1. Clone the repository
