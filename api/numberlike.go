@@ -20,6 +20,8 @@ func NumberLike(w http.ResponseWriter, r *http.Request) {
 		handlePost(w, r)
 	case http.MethodGet:
 		handleGet(w, r)
+	case http.MethodOptions:
+		handleOptions(w, r)
 	default:
 		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 		return
@@ -64,7 +66,7 @@ func handleGet(w http.ResponseWriter, r *http.Request) {
 
 	numStr := r.URL.Query().Get("n")
 	if numStr == "" {
-		http.Error(w, "Provided no number (query parameter 'n')", http.StatusBadRequest)
+		http.Error(w, "No number provided (query parameter 'n')", http.StatusBadRequest)
 		return
 	}
 
@@ -86,6 +88,20 @@ func handleGet(w http.ResponseWriter, r *http.Request) {
 	}
 	w.WriteHeader(http.StatusOK)
 	w.Write(likesJSON)
+}
+
+func handleOptions(w http.ResponseWriter, _ *http.Request) {
+	// Set CORS headers
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	w.Header().Set("Access-Control-Max-Age", "86400") // 1 day
+
+	// Also include the standard Allow header
+	w.Header().Set("Allow", "GET, POST, OPTIONS")
+
+	// No content needed
+	w.WriteHeader(http.StatusNoContent)
 }
 
 // Functions and variables used by the API, can't be seperated into another file due to some vercel reason
