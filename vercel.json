@@ -12,7 +12,7 @@
         },
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "*"
+          "value": "https://everynumber.vercel.app/"
         },
         {
           "key": "Access-Control-Allow-Methods",
