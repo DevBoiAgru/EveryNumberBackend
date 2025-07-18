@@ -92,6 +92,8 @@ func handleGet(w http.ResponseWriter, r *http.Request) {
 
 func handleOptions(w http.ResponseWriter, _ *http.Request) {
 	// Set CORS headers
+
+	// Let vercel handle origins. 
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	w.Header().Set("Access-Control-Max-Age", "86400") // 1 day
